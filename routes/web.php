@@ -15,12 +15,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('layouts.app');
 });
 
-Route::get('/listarConsultor', function () {
-    return view('pages/listar_consultores');
-})->name('listarConsultor');
+// Route::get('/listarConsultor', function () {
+//     return view('pages/listar_consultores');
+// })->name('listarConsultor');
 
 // Auth::routes();
 
