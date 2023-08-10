@@ -4,7 +4,7 @@
             bgcolor=#cccccc  id="pesquisaAvancada">
         <tbody>
             <tr bgcolor=#efefef>
-            <td colspan=5><span class="style3">Ana Paula Fontes Martins Chiodaro</span> </td>
+            <td colspan=5><span class="style3">{{ nome }}</span> </td>
             </tr>
             <tr bgcolor=#fafafa>
             <td nowrap><div align="center"><strong>Per&iacute;odo</strong></div></td>
@@ -41,6 +41,9 @@
 
 <script>
 export default {
+    props: {
+        nome: String
+    },
     name: "PesquisaConsultorContainerComponent",
 }
 </script>
