@@ -17,34 +17,34 @@
             <TD style="BORDER-BOTTOM: #ccc 1px solid">&nbsp;</TD>
             <TD width=98 background="" height=40 rowSpan=2><A
               href="http://www.agence.com.br/" target=_blank><IMG alt=""
-              src="inc/logo.gif"
+              src="{{ asset('inc/logo.gif') }}"
               border=0></A></TD></TR>
           <TR>
             <TD
             style="PADDING-RIGHT: 3px; PADDING-LEFT: 3px; PADDING-BOTTOM: 3px; BORDER-LEFT: #ccc 1px dotted; PADDING-TOP: 3px"><IMG
               height=15 alt=""
-              src="inc/fig.gif"
+              src="{{ asset('inc/fig.gif') }}"
               width=51 border=0></TD></TR></TBODY></TABLE></TD>
       <TD noWrap width=10><IMG
-        src="inc/spacer.gif"
+        src="{{ asset('inc/spacer.gif') }}"
         width=10></TD></TR>
     <TR>
       <TD width="100%" colSpan=3 height=10><IMG
-        src="inc/spacer.gif"
+        src="{{ asset('inc/spacer.gif') }}"
         width=10></TD></TR>
     <TR>
       <TD noWrap width=10><IMG
-        src="inc/spacer.gif"
+        src="{{ asset('inc/spacer.gif') }}"
         width=10></TD>
       <TD width="100%">&nbsp;</TD>
       <TD noWrap width=10><IMG
-        src="inc/spacer.gif"
+        src="{{ asset('inc/spacer.gif') }}"
         width=10></TD></TR></TBODY></TABLE>
   <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
     <TBODY>
     <TR>
       <TD noWrap width=10><IMG
-        src="inc/spacer.gif"
+        src="{{ asset('inc/spacer.gif') }}"
         width=10></TD>
       <TD width="100%">
         <table cellspacing=0 cellpadding=0 width="100%" border=0>
@@ -262,6 +262,6 @@
           </tr>
         </table></TD>
       <TD noWrap width=10><IMG
-        src="inc/spacer.gif"
+        src="{{ asset('inc/spacer.gif') }}"
         width=10></TD></TR></TBODY></TABLE>
 @endsection

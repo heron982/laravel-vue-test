@@ -11,6 +11,9 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/cor_fundo.js') }}" defer></script>
+    <script src="{{ asset('js/script_flash.js') }}" defer></script>
+    <script src="{{ asset('js/popcalednar.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
