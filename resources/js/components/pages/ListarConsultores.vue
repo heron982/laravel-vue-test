@@ -80,7 +80,11 @@
                 </tr>
             </tbody>
         </table>
-        <pesquisa-consultor-container-component v-for="(item, index) in this.consultores" :key="index" v-bind:nome="item.co_usuario"/>
+        <pesquisa-consultor-container-component
+            v-for="(item, index) in this.consultores"
+            :key="index"
+            v-bind:nome="item.co_usuario"
+            v-bind:operacoes="JSON.parse(item.operacoes)"/>
     </div>
 </template>
 

@@ -5116,7 +5116,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    nome: String
+    nome: String,
+    operacoes: Array
+  },
+  mounted: function mounted() {},
+  computed: {
+    getOperacoes: function getOperacoes() {
+      return this.operacoes;
+    }
   },
   name: "PesquisaConsultorContainerComponent"
 });
@@ -5305,59 +5312,52 @@ var render = function render() {
     }
   }, [_c("span", {
     staticClass: "style3"
-  }, [_vm._v(_vm._s(_vm.nome))])])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("tr", {
-    attrs: {
-      bgcolor: "#fafafa"
-    }
-  }, [_c("td", {
-    attrs: {
-      nowrap: ""
-    }
-  }, [_vm._v("Janeiro de 2007")]), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), _vm._m(3), _vm._v(" "), _c("td", [_c("div", {
-    attrs: {
-      align: "right"
-    }
-  }, [_c("font", {
-    attrs: {
-      color: "#FF0000"
-    }
-  }, [_vm._v("- R$ 1.500,00")])], 1)])]), _vm._v(" "), _vm._m(4), _vm._v(" "), _c("tr", {
-    attrs: {
-      bgcolor: "#efefef"
-    }
-  }, [_vm._m(5), _vm._v(" "), _c("td", [_c("div", {
-    attrs: {
-      align: "right"
-    }
-  }, [_c("font", {
-    attrs: {
-      color: "#000000"
-    }
-  }, [_vm._v("R$ 26.500,00")])], 1)]), _vm._v(" "), _c("td", [_c("div", {
-    attrs: {
-      align: "right"
-    }
-  }, [_c("font", {
-    attrs: {
-      color: "#000000"
-    }
-  }, [_vm._v("- R$ 4.000,00")])], 1)]), _vm._v(" "), _c("td", [_c("div", {
-    attrs: {
-      align: "right"
-    }
-  }, [_c("font", {
-    attrs: {
-      color: "#000000"
-    }
-  }, [_vm._v("- R$ 3.500,00")])], 1)]), _vm._v(" "), _c("td", [_c("div", {
-    attrs: {
-      align: "right"
-    }
-  }, [_c("font", {
-    attrs: {
-      color: "#0000FF"
-    }
-  }, [_vm._v("R$ 19.000,00")])], 1)])])])])]);
+  }, [_vm._v(_vm._s(_vm.nome))])])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._l(_vm.getOperacoes, function (item, index) {
+    return _c("tr", {
+      key: index,
+      attrs: {
+        bgcolor: "#fafafa"
+      }
+    }, [_c("td", {
+      attrs: {
+        nowrap: ""
+      }
+    }, [_vm._v(_vm._s(new Date(item.data_emissao).toLocaleString("default", {
+      month: "long",
+      year: "numeric"
+    })))]), _vm._v(" "), _c("td", [_c("div", {
+      attrs: {
+        align: "right"
+      }
+    }, [_vm._v(_vm._s(item.renda_liquida.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL"
+    })))])]), _vm._v(" "), _c("td", [_c("div", {
+      attrs: {
+        align: "right"
+      }
+    }, [_vm._v("-" + _vm._s(item.custo_fixo.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL"
+    })))])]), _vm._v(" "), _c("td", [_c("div", {
+      attrs: {
+        align: "right"
+      }
+    }, [_vm._v("-" + _vm._s(item.comissao.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL"
+    })))])]), _vm._v(" "), _c("td", [_c("div", {
+      "class": [{
+        negativo: item.lucro < 0
+      }],
+      attrs: {
+        align: "right"
+      }
+    }, [_vm._v(_vm._s(item.lucro.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL"
+    })))])])]);
+  })], 2)])]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -5391,67 +5391,6 @@ var staticRenderFns = [function () {
       align: "center"
     }
   }, [_c("strong", [_vm._v("Lucro")])])])]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("td", [_c("div", {
-    attrs: {
-      align: "right"
-    }
-  }, [_vm._v("R$ 1.500,00")])]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("td", [_c("div", {
-    attrs: {
-      align: "right"
-    }
-  }, [_vm._v("- R$ 2.000,00")])]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("td", [_c("div", {
-    attrs: {
-      align: "right"
-    }
-  }, [_vm._v("- R$ 1.000,00")])]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("tr", {
-    attrs: {
-      bgcolor: "#fafafa"
-    }
-  }, [_c("td", {
-    attrs: {
-      nowrap: ""
-    }
-  }, [_vm._v("Fevereiro de 2007 ")]), _vm._v(" "), _c("td", [_c("div", {
-    attrs: {
-      align: "right"
-    }
-  }, [_vm._v("R$ 25.000,00")])]), _vm._v(" "), _c("td", [_c("div", {
-    attrs: {
-      align: "right"
-    }
-  }, [_vm._v("- R$ 2.000,00")])]), _vm._v(" "), _c("td", [_c("div", {
-    attrs: {
-      align: "right"
-    }
-  }, [_vm._v("- R$ 2.500,00")])]), _vm._v(" "), _c("td", [_c("div", {
-    attrs: {
-      align: "right"
-    }
-  }, [_vm._v("R$ 20.500,00")])])]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("td", {
-    attrs: {
-      nowrap: "",
-      bgcolor: "#efefef"
-    }
-  }, [_c("strong", [_vm._v("SALDO")])]);
 }];
 render._withStripped = true;
 
@@ -5667,7 +5606,8 @@ var render = function render() {
     return _c("pesquisa-consultor-container-component", {
       key: index,
       attrs: {
-        nome: item.co_usuario
+        nome: item.co_usuario,
+        operacoes: JSON.parse(item.operacoes)
       }
     });
   })], 2);
@@ -10411,6 +10351,30 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n#app{\n    min-height: 100vh;\n    width: 100vw;\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PesquisaConsultorContainerComponent.vue?vue&type=style&index=0&id=0e24dcdb&lang=css&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PesquisaConsultorContainerComponent.vue?vue&type=style&index=0&id=0e24dcdb&lang=css& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.negativo {\n    color: #FF0000;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -27942,6 +27906,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PesquisaConsultorContainerComponent.vue?vue&type=style&index=0&id=0e24dcdb&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PesquisaConsultorContainerComponent.vue?vue&type=style&index=0&id=0e24dcdb&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PesquisaConsultorContainerComponent_vue_vue_type_style_index_0_id_0e24dcdb_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PesquisaConsultorContainerComponent.vue?vue&type=style&index=0&id=0e24dcdb&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PesquisaConsultorContainerComponent.vue?vue&type=style&index=0&id=0e24dcdb&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PesquisaConsultorContainerComponent_vue_vue_type_style_index_0_id_0e24dcdb_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PesquisaConsultorContainerComponent_vue_vue_type_style_index_0_id_0e24dcdb_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js":
 /*!****************************************************************************!*\
   !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
@@ -28314,15 +28308,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _PesquisaConsultorContainerComponent_vue_vue_type_template_id_0e24dcdb___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PesquisaConsultorContainerComponent.vue?vue&type=template&id=0e24dcdb& */ "./resources/js/components/PesquisaConsultorContainerComponent.vue?vue&type=template&id=0e24dcdb&");
 /* harmony import */ var _PesquisaConsultorContainerComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PesquisaConsultorContainerComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/PesquisaConsultorContainerComponent.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _PesquisaConsultorContainerComponent_vue_vue_type_style_index_0_id_0e24dcdb_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PesquisaConsultorContainerComponent.vue?vue&type=style&index=0&id=0e24dcdb&lang=css& */ "./resources/js/components/PesquisaConsultorContainerComponent.vue?vue&type=style&index=0&id=0e24dcdb&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
+;
 
 
 /* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _PesquisaConsultorContainerComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _PesquisaConsultorContainerComponent_vue_vue_type_template_id_0e24dcdb___WEBPACK_IMPORTED_MODULE_0__.render,
   _PesquisaConsultorContainerComponent_vue_vue_type_template_id_0e24dcdb___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
@@ -28592,6 +28588,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_id_332fccf4_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./App.vue?vue&type=style&index=0&id=332fccf4&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/App.vue?vue&type=style&index=0&id=332fccf4&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/PesquisaConsultorContainerComponent.vue?vue&type=style&index=0&id=0e24dcdb&lang=css&":
+/*!**********************************************************************************************************************!*\
+  !*** ./resources/js/components/PesquisaConsultorContainerComponent.vue?vue&type=style&index=0&id=0e24dcdb&lang=css& ***!
+  \**********************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PesquisaConsultorContainerComponent_vue_vue_type_style_index_0_id_0e24dcdb_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PesquisaConsultorContainerComponent.vue?vue&type=style&index=0&id=0e24dcdb&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PesquisaConsultorContainerComponent.vue?vue&type=style&index=0&id=0e24dcdb&lang=css&");
 
 
 /***/ }),

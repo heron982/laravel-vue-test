@@ -67,7 +67,24 @@ Route::post('/consultores', function (Request $request)
 
     $result = DB::select(DB::raw($sql));
 
-    return response()->json($result);
+    $array = [];
+
+    foreach($result as $key => $consultor) {
+
+        $operacoes = json_decode($consultor->operacoes);
+        foreach($operacoes as $operacao) {
+            // $result[$key]->operacoes[$operacao->renda_liquida]['renda_liquida'] += $operacao->renda_liquida;
+            // $array[$consultor->co_usuario][$operacao->data_emissao]['renda_liquida'] += ;
+            // var_dump($operacao->renda_liquida);
+            $data = date('Y-m', strtotime($operacao->data_emissao));
+            $array[$consultor->co_usuario][$data]['renda_liquida'][] = $operacao->renda_liquida;
+            $array[$consultor->co_usuario][$data]['comissao'][] = $operacao->comissao;
+            $array[$consultor->co_usuario][$data]['lucro'][] = $operacao->lucro;
+            $array[$consultor->co_usuario][$data]['custo_fixo'][] = $operacao->custo_fixo;
+        }
+    }
+
+    return response()->json($array);
 })->name('consultores');
 
 // Route::get('/listarConsultor', function () {
