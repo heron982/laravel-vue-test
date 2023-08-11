@@ -14,7 +14,7 @@
             <td><div align="center"><strong>Lucro</strong></div></td>
             </tr>
             <tr bgcolor=#fafafa v-for="(item, index) in getOperacoes" :key="index">
-                <td nowrap>{{ new Date(item.data_emissao).toLocaleString('default', { month: 'long', year: 'numeric' }) }}</td>
+                <td nowrap>{{ new Date(item.periodo).toLocaleString('default', { month: 'long', year: 'numeric' }) }}</td>
                 <td><div align="right">{{ item.renda_liquida.toLocaleString("pt-BR", { style: "currency", currency: "BRL"}) }}</div></td>
                 <td><div align="right">-{{ item.custo_fixo.toLocaleString("pt-BR", { style: "currency", currency: "BRL"}) }}</div></td>
                 <td><div align="right">-{{ item.comissao.toLocaleString("pt-BR", { style: "currency", currency: "BRL"}) }}</div></td>

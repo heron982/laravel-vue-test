@@ -5196,7 +5196,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _yield$axios$post = _context.sent;
               data = _yield$axios$post.data;
               _this.consultores = data;
-            case 7:
+              console.log(_this.consultores);
+            case 8:
             case "end":
               return _context.stop();
           }
@@ -5322,7 +5323,7 @@ var render = function render() {
       attrs: {
         nowrap: ""
       }
-    }, [_vm._v(_vm._s(new Date(item.data_emissao).toLocaleString("default", {
+    }, [_vm._v(_vm._s(new Date(item.periodo).toLocaleString("default", {
       month: "long",
       year: "numeric"
     })))]), _vm._v(" "), _c("td", [_c("div", {
@@ -5606,8 +5607,8 @@ var render = function render() {
     return _c("pesquisa-consultor-container-component", {
       key: index,
       attrs: {
-        nome: item.co_usuario,
-        operacoes: JSON.parse(item.operacoes)
+        nome: item.nome,
+        operacoes: item.operacoes
       }
     });
   })], 2);

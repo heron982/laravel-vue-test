@@ -83,8 +83,8 @@
         <pesquisa-consultor-container-component
             v-for="(item, index) in this.consultores"
             :key="index"
-            v-bind:nome="item.co_usuario"
-            v-bind:operacoes="JSON.parse(item.operacoes)"/>
+            v-bind:nome="item.nome"
+            v-bind:operacoes="item.operacoes"/>
     </div>
 </template>
 
@@ -110,7 +110,7 @@ export default {
     computed: {
         exibirConsultores() {
             return this.consultores.length > 0 ? true : false;
-        }
+        },
     },
     methods: {
         async listarConsultores() {
@@ -128,7 +128,9 @@ export default {
                 }
             });
 
+
             this.consultores = data;
+            console.log(this.consultores);
         }
     }
 }

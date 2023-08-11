@@ -73,14 +73,20 @@ Route::post('/consultores', function (Request $request)
 
         $operacoes = json_decode($consultor->operacoes);
         foreach($operacoes as $operacao) {
-            // $result[$key]->operacoes[$operacao->renda_liquida]['renda_liquida'] += $operacao->renda_liquida;
-            // $array[$consultor->co_usuario][$operacao->data_emissao]['renda_liquida'] += ;
-            // var_dump($operacao->renda_liquida);
+
             $data = date('Y-m', strtotime($operacao->data_emissao));
-            $array[$consultor->co_usuario][$data]['renda_liquida'][] = $operacao->renda_liquida;
-            $array[$consultor->co_usuario][$data]['comissao'][] = $operacao->comissao;
-            $array[$consultor->co_usuario][$data]['lucro'][] = $operacao->lucro;
-            $array[$consultor->co_usuario][$data]['custo_fixo'][] = $operacao->custo_fixo;
+
+            $array[$consultor->co_usuario]['operacoes'][$data]['periodo'] = $data;
+
+            $array[$consultor->co_usuario]['operacoes'][$data]['renda_liquida'] ??= 0;
+            $array[$consultor->co_usuario]['operacoes'][$data]['comissao'] ??= 0;
+            $array[$consultor->co_usuario]['operacoes'][$data]['lucro'] ??= 0;
+
+            $array[$consultor->co_usuario]['nome'] = $consultor->co_usuario;
+            $array[$consultor->co_usuario]['operacoes'][$data]['renda_liquida'] += $operacao->renda_liquida;
+            $array[$consultor->co_usuario]['operacoes'][$data]['comissao'] += $operacao->comissao;
+            $array[$consultor->co_usuario]['operacoes'][$data]['lucro'] += $operacao->lucro;
+            $array[$consultor->co_usuario]['operacoes'][$data]['custo_fixo'] = $operacao->custo_fixo;
         }
     }
 
