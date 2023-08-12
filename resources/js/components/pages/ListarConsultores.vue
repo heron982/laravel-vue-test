@@ -43,43 +43,9 @@
                         </div>
                     </td>
                 </tr>
-                <tr bgcolor="#fafafa">
-                    <td nowrap="nowrap" bgcolor="#efefef">
-                        <div align="right"><strong>Consultores</strong></div>
-                    </td>
-                    <td>
-                        <table align="center">
-                            <tr>
-                                <td><select multiple size="8" name="list1" id="list1" style="width:280">
-
-                                        <option value="aline.chastel">Aline Chastel Lima</option>
-
-                                        <option value="bruno.freitas">Bruno Sousa Freitas</option>
-                                        <option value="contato">Carlos Cezar Gir�o de Arruda</option>
-                                        <option value="carlos.arruda">Carlos Fl�vio Gir�o de Arruda</option>
-                                        <option value="carlos.carvalho">Carlos Henrique de Carvalho Filho</option>
-                                        <option value="felipe.chahad">Felipe Chahad</option>
-
-                                        <option value="silvio.maraes">Silvio Mar�es Ferreira</option>
-                                    </select>
-                                </td>
-                                <td align="center" valign="middle"><input name="button" type="button"
-                                        onClick="move(list1,list2)" value=">>">
-                                    <br>
-                                    <input name="button" type="button" onClick="move(list2,list1)" value="<<">
-                                </td>
-                                <td><select multiple size="8" name="list2" id="list2" style="width:280">
-                                        <option value="anapaula.chiodaro">Ana Paula Fontes Martins Chiodaro</option>
-                                        <option value="renato.pereira">Renato Marcus Pereira</option>
-                                    </select>
-                                    <input type="hidden" name="lista_analista" value="">
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
             </tbody>
         </table>
+        <selecionar-consultores-component/>
         <pesquisa-consultor-container-component
             v-for="(item, index) in this.consultores"
             :key="index"
@@ -90,16 +56,21 @@
 
 <script>
 import PesquisaConsultorContainerComponent from '../PesquisaConsultorContainerComponent.vue';
+import SelecionarConsultoresComponent from '../SelecionarConsultoresComponent.vue';
+
 export default {
     name: 'ListarConsultores',
-    components: { PesquisaConsultorContainerComponent },
+    components: {
+        PesquisaConsultorContainerComponent,
+        SelecionarConsultoresComponent
+    },
     data() {
         return {
             mes_inicio: 'Fev',
             ano_inicio: '2004',
             mes_final: 'Mai',
             ano_final: '2005',
-            meses: ['Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+            meses: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
             anos: ['2003', '2004', '2005', '2006', '2007'],
             consultores: []
         }

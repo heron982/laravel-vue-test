@@ -23,6 +23,7 @@ Route::get('/', function () {
 Route::post('/consultores', function (Request $request)
 {
     $meses = [
+        'Jan' => 'Jan',
         'Fev' => 'Feb',
         'Mar' => 'Mar',
         'Abr' => 'Apr',
@@ -61,8 +62,13 @@ Route::post('/consultores', function (Request $request)
         cao_usuario cli ON cli.co_usuario = os.co_usuario
             INNER JOIN
         cao_salario sal ON sal.co_usuario = cli.co_usuario
+            INNER JOIN
+	    permissao_sistema per ON per.co_usuario = cli.co_usuario
     WHERE
         fat.data_emissao BETWEEN DATE('$date_inicio') AND DATE('$date_final')
+        AND per.co_sistema = 1
+        AND per.in_ativo = 'S'
+        AND per.co_tipo_usuario IN (0,1,2)
     GROUP BY cli.co_usuario";
 
     $result = DB::select(DB::raw($sql));
@@ -92,6 +98,13 @@ Route::post('/consultores', function (Request $request)
 
     return response()->json($array);
 })->name('consultores');
+
+Route::get('/consultores_disponiveis', function (Request $request){
+    $sql = "SELECT usu.co_usuario FROM cao_usuario usu INNER JOIN permissao_sistema per ON per.co_usuario = usu.co_usuario WHERE per.co_sistema = 1 AND per.in_ativo = 'S' AND per.co_tipo_usuario IN (0,1,2)";
+    $query = DB::select(DB::raw($sql));
+
+    return response()->json($query);
+});
 
 // Route::get('/listarConsultor', function () {
 //     return view('pages/listar_consultores');
