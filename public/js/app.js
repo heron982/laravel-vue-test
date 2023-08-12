@@ -5149,39 +5149,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   name: "SelecionarConsultoresComponent",
   data: function data() {
     return {
-      list1: {},
-      list2: {},
+      list1: [],
+      list2: [],
       list1Selecionado: [],
       list2Selecionado: []
     };
   },
   methods: {
     setList2: function setList2() {
-      // console.log(this.list1Selecionado)
-      // console.log(this.list1);
-      // console.log(this.list1Selecionado);
       for (var x = 0; x < this.list1.length; x++) {
-        if (this.list1[x].co_usuario) {
-          if (this.list1[x].co_usuario == this.list1Selecionado) {
-            // console.log(this.list1[x].co_usuario);
-            this.list2Selecionado.push(this.list1[x]);
-            delete this.list1[x];
-          }
+        if (this.list1[x] == this.list1Selecionado) {
+          this.list2.push(this.list1[x]);
+          this.list1[x] = '';
+          console.log(this.list1);
         }
       }
-      // this.list1.forEach(element => {
-      //     if(element.co_usuario === this.list1Selecioando) {
-      //         this.list1Selecioando.push(element.co_usuario);
-      //         delete element.co_usuario;
-      //     }
-
-      // });
     },
     setList1: function setList1() {
-      console.log(this.list2Selecioando);
-      this.list2.forEach(function (element) {
-        console.log(element);
-      });
+      for (var x = 0; x < this.list2.length; x++) {
+        if (this.list2[x] == this.list2Selecionado) {
+          this.list1.push(this.list2[x]);
+          this.list2[x] = '';
+          console.log(this.list2);
+        }
+      }
+    },
+    getConsultores: function getConsultores() {
+      return this.list1;
     }
   },
   mounted: function mounted() {
@@ -5197,7 +5191,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             _yield$axios$get = _context.sent;
             data = _yield$axios$get.data;
             _this.list1 = data;
-          case 5:
+            console.log(_this.list1);
+          case 6:
           case "end":
             return _context.stop();
         }
@@ -5256,13 +5251,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     listarConsultores: function listarConsultores() {
       var _this = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var inicio, _final, _yield$axios$post, data;
+        var consultores, inicio, _final, _yield$axios$post, data;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
+              consultores = _this.$refs.listarComponente.getConsultores();
               inicio = "".concat(_this.mes_inicio, " ").concat(_this.ano_inicio);
               _final = "".concat(_this.mes_final, " ").concat(_this.ano_final);
-              _context.next = 4;
+              _context.next = 5;
               return axios.post('/consultores', {
                 inicio: {
                   mes: _this.mes_inicio,
@@ -5271,19 +5267,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 "final": {
                   mes: _this.mes_final,
                   ano: _this.ano_final
-                }
+                },
+                consultores: consultores
               });
-            case 4:
+            case 5:
               _yield$axios$post = _context.sent;
               data = _yield$axios$post.data;
               _this.consultores = data;
               console.log(_this.consultores);
-            case 8:
+            case 9:
             case "end":
               return _context.stop();
           }
         }, _callee);
       }))();
+    },
+    getConsultoresSelecionados: function getConsultoresSelecionados(consultores) {
+      console.log(consultores);
     }
   }
 });
@@ -5531,11 +5531,17 @@ var render = function render() {
     }
   }, _vm._l(this.list1, function (item, index) {
     return _c("option", {
+      directives: [{
+        name: "show",
+        rawName: "v-show",
+        value: item != "",
+        expression: "item != ''"
+      }],
       key: index,
       domProps: {
-        value: item.co_usuario
+        value: item
       }
-    }, [_vm._v(_vm._s(item.co_usuario))]);
+    }, [_vm._v(_vm._s(item))]);
   }), 0)]), _vm._v(" "), _c("td", {
     attrs: {
       align: "center",
@@ -5588,11 +5594,17 @@ var render = function render() {
     }
   }, _vm._l(this.list2, function (item, index) {
     return _c("option", {
+      directives: [{
+        name: "show",
+        rawName: "v-show",
+        value: item != "",
+        expression: "item != ''"
+      }],
       key: index,
       domProps: {
-        value: item.co_usuario
+        value: item
       }
-    }, [_vm._v(_vm._s(item.co_usuario))]);
+    }, [_vm._v(_vm._s(item))]);
   }), 0), _vm._v(" "), _c("input", {
     attrs: {
       type: "hidden",
@@ -5825,7 +5837,9 @@ var render = function render() {
       value: "Pizza",
       name: "btSalvar222"
     }
-  })])], 1)])])])]), _vm._v(" "), _c("selecionar-consultores-component"), _vm._v(" "), _vm._l(this.consultores, function (item, index) {
+  })])], 1)])])])]), _vm._v(" "), _c("selecionar-consultores-component", {
+    ref: "listarComponente"
+  }), _vm._v(" "), _vm._l(this.consultores, function (item, index) {
     return _c("pesquisa-consultor-container-component", {
       key: index,
       attrs: {

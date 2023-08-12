@@ -22,6 +22,8 @@ Route::get('/', function () {
 
 Route::post('/consultores', function (Request $request)
 {
+    $consultores = "'" . implode("','",$request->consultores) . "'";
+
     $meses = [
         'Jan' => 'Jan',
         'Fev' => 'Feb',
@@ -69,6 +71,7 @@ Route::post('/consultores', function (Request $request)
         AND per.co_sistema = 1
         AND per.in_ativo = 'S'
         AND per.co_tipo_usuario IN (0,1,2)
+        AND cli.co_usuario NOT IN (".$consultores.")
     GROUP BY cli.co_usuario";
 
     $result = DB::select(DB::raw($sql));
@@ -103,13 +106,10 @@ Route::get('/consultores_disponiveis', function (Request $request){
     $sql = "SELECT usu.co_usuario FROM cao_usuario usu INNER JOIN permissao_sistema per ON per.co_usuario = usu.co_usuario WHERE per.co_sistema = 1 AND per.in_ativo = 'S' AND per.co_tipo_usuario IN (0,1,2)";
     $query = DB::select(DB::raw($sql));
 
-    return response()->json($query);
+    $array = [];
+    foreach($query as $consultor) {
+        $array[] = $consultor->co_usuario;
+    }
+
+    return response()->json($array);
 });
-
-// Route::get('/listarConsultor', function () {
-//     return view('pages/listar_consultores');
-// })->name('listarConsultor');
-
-// Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

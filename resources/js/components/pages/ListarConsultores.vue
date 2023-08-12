@@ -45,7 +45,7 @@
                 </tr>
             </tbody>
         </table>
-        <selecionar-consultores-component/>
+        <selecionar-consultores-component ref="listarComponente"/>
         <pesquisa-consultor-container-component
             v-for="(item, index) in this.consultores"
             :key="index"
@@ -85,6 +85,9 @@ export default {
     },
     methods: {
         async listarConsultores() {
+            let consultores = this.$refs.listarComponente.getConsultores();
+
+
             let inicio = `${this.mes_inicio} ${this.ano_inicio}`;
             let final = `${this.mes_final} ${this.ano_final}`;
 
@@ -96,12 +99,16 @@ export default {
                 final: {
                     mes: this.mes_final,
                     ano: this.ano_final
-                }
+                },
+                consultores: consultores
             });
 
 
             this.consultores = data;
             console.log(this.consultores);
+        },
+        getConsultoresSelecionados(consultores) {
+            console.log(consultores);
         }
     }
 }
