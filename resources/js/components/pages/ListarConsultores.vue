@@ -9,17 +9,17 @@
                     <td>
                         <font color="black">
                             <select v-model="mes_inicio">
-                                <option v-for="(item, index) in this.meses" :key="index" :value="item">{{item}}</option>
+                                <option v-for="(item, index) in this.meses" :key="index" :value="item">{{ item }}</option>
                             </select>
                             <select v-model="ano_inicio">
-                                <option v-for="(item, index) in this.anos" :key="index" :value="item">{{item}}</option>
+                                <option v-for="(item, index) in this.anos" :key="index" :value="item">{{ item }}</option>
                             </select>
 
                             <select v-model="mes_final">
-                                <option v-for="(item, index) in this.meses" :key="index" :value="item">{{item}}</option>
+                                <option v-for="(item, index) in this.meses" :key="index" :value="item">{{ item }}</option>
                             </select>
                             <select v-model="ano_final">
-                                <option v-for="(item, index) in this.anos" :key="index" :value="item">{{item}}</option>
+                                <option v-for="(item, index) in this.anos" :key="index" :value="item">{{ item }}</option>
                             </select>
                         </font>
                     </td>
@@ -30,14 +30,16 @@
                                 <button @click="listarConsultores"
                                     style="BORDER-RIGHT: 1px outset; BORDER-TOP: 1px outset; FONT-SIZE: 8pt; BACKGROUND-POSITION-Y: center; LEFT: 120px; BACKGROUND-IMAGE: url(img/icone_relatorio.png); BORDER-LEFT: 1px outset; WIDTH: 110px; BORDER-BOTTOM: 1px outset; BACKGROUND-REPEAT: no-repeat; FONT-FAMILY: Tahoma, Verdana, Arial; HEIGHT: 22px; BACKGROUND-COLOR: #CCCCCC">Relatorio</button>
 
-                                <input
+                                <button
+                                    @click="switchComponentGrafico()"
                                     style="BORDER-RIGHT: 1px outset; BORDER-TOP: 1px outset; FONT-SIZE: 8pt; BACKGROUND-POSITION-Y: center; LEFT: 120px; BACKGROUND-IMAGE: url(img/icone_grafico.png); BORDER-LEFT: 1px outset; WIDTH: 110px; BORDER-BOTTOM: 1px outset; BACKGROUND-REPEAT: no-repeat; FONT-FAMILY: Tahoma, Verdana, Arial; HEIGHT: 22px; BACKGROUND-COLOR: #CCCCCC"
-                                    type="submit" value="Gr&aacute;fico" name="btSalvar222" />
+                                    >Gráfico</button>
 
 
-                                <input
+                                <button
+                                    @click="switchComponentPizza()"
                                     style="BORDER-RIGHT: 1px outset; BORDER-TOP: 1px outset; FONT-SIZE: 8pt; BACKGROUND-POSITION-Y: center; LEFT: 120px; BACKGROUND-IMAGE: url(img/icone_pizza.png); BORDER-LEFT: 1px outset; WIDTH: 110px; BORDER-BOTTOM: 1px outset; BACKGROUND-REPEAT: no-repeat; FONT-FAMILY: Tahoma, Verdana, Arial; HEIGHT: 22px; BACKGROUND-COLOR: #CCCCCC"
-                                    type="submit" value="Pizza" name="btSalvar222" />
+                                    >Pizza</button>
 
                             </font>
                         </div>
@@ -45,24 +47,29 @@
                 </tr>
             </tbody>
         </table>
-        <selecionar-consultores-component ref="listarComponente"/>
-        <pesquisa-consultor-container-component
-            v-for="(item, index) in this.consultores"
-            :key="index"
-            v-bind:nome="item.nome"
-            v-bind:operacoes="item.operacoes"/>
+        <selecionar-consultores-component ref="listarComponente" />
+        <keep-alive>
+            <component :is="componenteAtual" :consultores="this.consultores"></component>
+        </keep-alive>
+
     </div>
 </template>
 
 <script>
 import PesquisaConsultorContainerComponent from '../PesquisaConsultorContainerComponent.vue';
+import ListarConsultorComponent from './ListarConsultorComponent.vue';
 import SelecionarConsultoresComponent from '../SelecionarConsultoresComponent.vue';
+import GraficoConsultorComponent from './GraficoConsultorComponent.vue';
+import PizzaConsultorComponent from './PizzaConsultorComponent.vue';
 
 export default {
     name: 'ListarConsultores',
     components: {
         PesquisaConsultorContainerComponent,
-        SelecionarConsultoresComponent
+        ListarConsultorComponent,
+        SelecionarConsultoresComponent,
+        GraficoConsultorComponent,
+        PizzaConsultorComponent
     },
     data() {
         return {
@@ -72,7 +79,8 @@ export default {
             ano_final: '2005',
             meses: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
             anos: ['2003', '2004', '2005', '2006', '2007'],
-            consultores: []
+            consultores: [],
+            componenteAtual: ListarConsultorComponent
         }
     },
     mounted() {
@@ -84,7 +92,14 @@ export default {
         },
     },
     methods: {
+        switchComponentGrafico() {
+            this.componenteAtual = GraficoConsultorComponent;
+        },
+        switchComponentPizza() {
+            this.componenteAtual = PizzaConsultorComponent;
+        },
         async listarConsultores() {
+            this.componenteAtual = ListarConsultorComponent;
             let consultores = this.$refs.listarComponente.getConsultores();
 
 
