@@ -1,6 +1,6 @@
 <template>
     <div>
-        <pesquisa-consultor-container-component v-for="(item, index) in consultores" :key="index"
+        <pesquisa-consultor-container-component v-for="(item, index) in data" :key="index"
                 v-bind:nome="item.nome" v-bind:operacoes="item.operacoes" />
     </div>
 </template>
@@ -13,7 +13,7 @@ export default {
     },
     name: "ListarConsultorComponent",
     props: {
-        consultores: []
+        data: []
     }
 }
 </script>

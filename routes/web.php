@@ -97,6 +97,9 @@ Route::post('/consultores', function (Request $request)
             $array[$consultor->co_usuario]['operacoes'][$data]['comissao'] += $operacao->comissao;
             $array[$consultor->co_usuario]['operacoes'][$data]['lucro'] += $operacao->lucro;
             $array[$consultor->co_usuario]['operacoes'][$data]['custo_fixo'] += $operacao->custo_fixo;
+
+            $array[$consultor->co_usuario]['renda_total'] ??= 0;
+            $array[$consultor->co_usuario]['renda_total'] += $array[$consultor->co_usuario]['operacoes'][$data]['renda_liquida'];
         }
     }
 

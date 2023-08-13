@@ -5220,23 +5220,95 @@ __webpack_require__.r(__webpack_exports__);
 
 chart_js__WEBPACK_IMPORTED_MODULE_0__.Chart.register(chart_js__WEBPACK_IMPORTED_MODULE_0__.CategoryScale, chart_js__WEBPACK_IMPORTED_MODULE_0__.LinearScale, chart_js__WEBPACK_IMPORTED_MODULE_0__.BarElement, chart_js__WEBPACK_IMPORTED_MODULE_0__.Title, chart_js__WEBPACK_IMPORTED_MODULE_0__.Tooltip, chart_js__WEBPACK_IMPORTED_MODULE_0__.Legend);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['data'],
   name: "GraficoConsultorComponent",
   components: {
     Bar: vue_chartjs__WEBPACK_IMPORTED_MODULE_1__.Bar
   },
+  mounted: function mounted() {
+    // console.log(this.data);
+    var months = {
+      'jan.': 0,
+      'fev.': 0,
+      'mar.': 0,
+      'abr.': 0,
+      'mai.': 0,
+      'jun.': 0,
+      'jul.': 0,
+      'ago.': 0,
+      'set.': 0,
+      'out.': 0,
+      'nov.': 0,
+      'dez.': 0
+    };
+    var clientes = [];
+    for (var i in this.data) {
+      var cliente = {
+        label: this.data[i].nome,
+        backgroundColor: 'blue',
+        data: []
+      };
+      // console.log(this.data[i].operacoes);
+      for (var m in months) {
+        for (var x in this.data[i].operacoes) {
+          var mes = new Date(this.data[i].operacoes[x].periodo).toLocaleString('pt-BR', {
+            month: 'short'
+          });
+          if (mes == m) {
+            months[m]++;
+            cliente.data.push(this.data[i].operacoes[x].renda_liquida);
+          }
+          // console.log('debug atual');
+          // console.log(new Date(m).getMonth());
+          // console.log({
+          // 'nome': this.data[i].nome,
+          // 'mes': mes,
+
+          // })
+          // months[new Date(this.data[i].operacoes[x].periodo).toLocaleString('pt-BR', { month: 'short' })].push({
+          //     nome: this.data[i].nome,
+          //     renda: this.data[i].operacoes[x].renda_liquida
+          // });
+          // months[].push()
+        }
+      }
+
+      clientes.push(cliente);
+    }
+    this.chartConfig.datasets = clientes;
+    var months_filtered = [];
+    for (var _i in months) {
+      if (months[_i] > 0) {
+        months_filtered.push(_i);
+      }
+      // console.log(i);
+    }
+
+    this.chartConfig.labels = months_filtered;
+    console.log(this.chartConfig.labels);
+    console.log(this.chartConfig.datasets);
+  },
+  computed: {
+    loadGraph: function loadGraph() {
+      if (this.chartConfig.datasets.length && this.chartConfig.labels.length > 0) {
+        console.log('ativou!');
+        return true;
+      }
+      ;
+      console.log('nao ativou');
+      return false;
+    }
+  },
   data: function data() {
     return {
+      labels: [],
+      rendas: [],
       chartConfig: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        datasets: [{
-          label: 'Data One',
-          backgroundColor: '#f87979',
-          data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
-        }]
+        labels: [],
+        datasets: []
       },
       chartOptions: {
-        responsive: true,
-        maintainAspectRatio: false
+        responsive: true
       }
     };
   }
@@ -5263,7 +5335,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   name: "ListarConsultorComponent",
   props: {
-    consultores: []
+    data: []
   }
 });
 
@@ -5407,9 +5479,13 @@ __webpack_require__.r(__webpack_exports__);
 
 chart_js__WEBPACK_IMPORTED_MODULE_0__.Chart.register(chart_js__WEBPACK_IMPORTED_MODULE_0__.ArcElement, chart_js__WEBPACK_IMPORTED_MODULE_0__.Tooltip, chart_js__WEBPACK_IMPORTED_MODULE_0__.Legend);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['data'],
+  props: ['consultores'],
   components: {
     Pie: vue_chartjs__WEBPACK_IMPORTED_MODULE_1__.Pie
+  },
+  mounted: function mounted() {
+    console.log('Pizza');
+    console.log(consultores);
   },
   data: function data() {
     return {
@@ -5772,6 +5848,12 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", [_c("Bar", {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: _vm.loadGraph,
+      expression: "loadGraph"
+    }],
     attrs: {
       data: _vm.chartConfig,
       options: _vm.chartOptions
@@ -5799,7 +5881,7 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", _vm._l(_vm.consultores, function (item, index) {
+  return _c("div", _vm._l(_vm.data, function (item, index) {
     return _c("pesquisa-consultor-container-component", {
       key: index,
       attrs: {
@@ -6022,12 +6104,12 @@ var render = function render() {
     }
   }, [_vm._v("Pizza")])])], 1)])])])]), _vm._v(" "), _c("selecionar-consultores-component", {
     ref: "listarComponente"
-  }), _vm._v(" "), _c("keep-alive", [_c(_vm.componenteAtual, {
+  }), _vm._v(" "), _c(_vm.componenteAtual, {
     tag: "component",
     attrs: {
-      consultores: this.consultores
+      data: this.consultores
     }
-  })], 1)], 1);
+  })], 1);
 };
 var staticRenderFns = [function () {
   var _vm = this,

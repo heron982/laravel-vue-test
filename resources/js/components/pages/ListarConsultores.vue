@@ -48,9 +48,7 @@
             </tbody>
         </table>
         <selecionar-consultores-component ref="listarComponente" />
-        <keep-alive>
-            <component :is="componenteAtual" :consultores="this.consultores"></component>
-        </keep-alive>
+        <component :is="componenteAtual" :data="this.consultores"></component>
 
     </div>
 </template>
