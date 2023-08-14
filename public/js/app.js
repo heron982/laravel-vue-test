@@ -5161,7 +5161,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         if (this.list1[x] == this.list1Selecionado) {
           this.list2.push(this.list1[x]);
           this.list1[x] = '';
-          console.log(this.list1);
         }
       }
     },
@@ -5170,7 +5169,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         if (this.list2[x] == this.list2Selecionado) {
           this.list1.push(this.list2[x]);
           this.list2[x] = '';
-          console.log(this.list2);
         }
       }
     },
@@ -5191,8 +5189,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             _yield$axios$get = _context.sent;
             data = _yield$axios$get.data;
             _this.list1 = data;
-            console.log(_this.list1);
-          case 6:
+          case 5:
           case "end":
             return _context.stop();
         }
@@ -5311,7 +5308,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         cor: 'red',
         qtd: 0
       }, {
-        cor: 'yello',
+        cor: 'yellow',
         qtd: 0
       }, {
         cor: 'orange',
@@ -5341,7 +5338,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var cor = null;
       while (cor == null) {
         var index = Math.floor(Math.random() * 5);
-        console.log(index);
         if (this.grafico_cores[index].qtd < 1) {
           cor = this.grafico_cores[index].cor;
           this.grafico_cores[index].qtd = this.grafico_cores[index].qtd + 1;
@@ -5350,7 +5346,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return cor;
     },
     switchComponentGrafico: function switchComponentGrafico() {
-      // console.log(this.data);
       for (var x = 0; x < this.grafico_cores.length; x++) {
         this.grafico_cores[x].qtd = 0;
       }
@@ -5375,7 +5370,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           backgroundColor: this.getClienteCor(),
           data: []
         };
-        // console.log(this.consultores[i].operacoes);
         for (var m in months) {
           for (var _x in this.consultores[i].operacoes) {
             var mes = new Date(this.consultores[i].operacoes[_x].periodo).toLocaleString('pt-BR', {
@@ -5385,21 +5379,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               months[m]++;
               cliente.data.push(this.consultores[i].operacoes[_x].renda_liquida);
             }
-            // console.log('debug atual');
-            // console.log(new Date(m).getMonth());
-            // console.log({
-            // 'nome': this.consultores[i].nome,
-            // 'mes': mes,
-
-            // })
-            // months[new Date(this.consultores[i].operacoes[x].periodo).toLocaleString('pt-BR', { month: 'short' })].push({
-            //     nome: this.consultores[i].nome,
-            //     renda: this.consultores[i].operacoes[x].renda_liquida
-            // });
-            // months[].push()
           }
         }
-
         clientes.push(cliente);
       }
       this.chartConfig.datasets = clientes;
@@ -5408,15 +5389,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         if (months[_i] > 0) {
           months_filtered.push(_i);
         }
-        // console.log(i);
       }
-
       this.chartConfig.labels = months_filtered;
-      console.log(this.chartConfig.labels);
-      console.log(this.chartConfig.datasets);
       this.componenteAtual = _GraficoConsultorComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"];
     },
     switchComponentPizza: function switchComponentPizza() {
+      for (var x = 0; x < this.grafico_cores.length; x++) {
+        this.grafico_cores[x].qtd = 0;
+      }
+      var somas = [];
+      var labels = [];
+      var cores = [];
+      for (var i in this.consultores) {
+        var soma = 0;
+        for (var _x2 in this.consultores[i].operacoes) {
+          soma += this.consultores[i].operacoes[_x2].renda_liquida;
+        }
+        labels.push(this.consultores[i].nome);
+        cores.push(this.getClienteCor());
+        somas.push(soma);
+      }
+      this.chartConfig.labels = labels;
+      this.chartConfig.datasets = [{
+        backgroundColor: cores,
+        data: somas
+      }];
       this.componenteAtual = _PizzaConsultorComponent_vue__WEBPACK_IMPORTED_MODULE_4__["default"];
     },
     listarConsultores: function listarConsultores() {
@@ -5446,17 +5443,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _yield$axios$post = _context.sent;
               data = _yield$axios$post.data;
               _this.consultores = data;
-              console.log(_this.consultores);
-            case 10:
+            case 9:
             case "end":
               return _context.stop();
           }
         }, _callee);
       }))();
     },
-    getConsultoresSelecionados: function getConsultoresSelecionados(consultores) {
-      console.log(consultores);
-    }
+    getConsultoresSelecionados: function getConsultoresSelecionados(consultores) {}
   }
 });
 
@@ -5496,28 +5490,9 @@ __webpack_require__.r(__webpack_exports__);
 
 chart_js__WEBPACK_IMPORTED_MODULE_0__.Chart.register(chart_js__WEBPACK_IMPORTED_MODULE_0__.ArcElement, chart_js__WEBPACK_IMPORTED_MODULE_0__.Tooltip, chart_js__WEBPACK_IMPORTED_MODULE_0__.Legend);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['consultores'],
+  props: ['chartConfig', 'chartOptions'],
   components: {
     Pie: vue_chartjs__WEBPACK_IMPORTED_MODULE_1__.Pie
-  },
-  mounted: function mounted() {
-    console.log('Pizza');
-    console.log(consultores);
-  },
-  data: function data() {
-    return {
-      chartConfig: {
-        labels: ['VueJs', 'EmberJs', 'ReactJs', 'AngularJs'],
-        datasets: [{
-          backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
-          data: [40, 20, 80, 10]
-        }]
-      },
-      chartOptions: {
-        responsive: true,
-        maintainAspectRatio: false
-      }
-    };
   },
   name: "PizzaConsultorComponent"
 });

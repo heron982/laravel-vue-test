@@ -88,7 +88,7 @@ export default {
             },
             grafico_cores: [
                 { cor: 'red', qtd: 0 },
-                { cor: 'yello', qtd: 0 },
+                { cor: 'yellow', qtd: 0 },
                 { cor: 'orange', qtd: 0 },
                 { cor: 'green', qtd: 0 },
                 { cor: 'pink', qtd: 0 },
@@ -109,7 +109,6 @@ export default {
             let cor = null;
             while (cor == null) {
                 let index = Math.floor(Math.random() * 5);
-                console.log(index);
                 if (this.grafico_cores[index].qtd < 1) {
                     cor = this.grafico_cores[index].cor;
                     this.grafico_cores[index].qtd = this.grafico_cores[index].qtd + 1;
@@ -119,7 +118,6 @@ export default {
             return cor;
         },
         switchComponentGrafico() {
-            // console.log(this.data);
             for (let x = 0; x < this.grafico_cores.length; x++) {
                 this.grafico_cores[x].qtd = 0;
             }
@@ -146,7 +144,6 @@ export default {
                     backgroundColor: this.getClienteCor(),
                     data: []
                 };
-                // console.log(this.consultores[i].operacoes);
                 for (let m in months) {
                     for (let x in this.consultores[i].operacoes) {
                         let mes = new Date(this.consultores[i].operacoes[x].periodo).toLocaleString('pt-BR', { month: 'short' });
@@ -154,18 +151,6 @@ export default {
                             months[m]++;
                             cliente.data.push(this.consultores[i].operacoes[x].renda_liquida);
                         }
-                        // console.log('debug atual');
-                        // console.log(new Date(m).getMonth());
-                        // console.log({
-                        // 'nome': this.consultores[i].nome,
-                        // 'mes': mes,
-
-                        // })
-                        // months[new Date(this.consultores[i].operacoes[x].periodo).toLocaleString('pt-BR', { month: 'short' })].push({
-                        //     nome: this.consultores[i].nome,
-                        //     renda: this.consultores[i].operacoes[x].renda_liquida
-                        // });
-                        // months[].push()
                     }
                 }
 
@@ -180,17 +165,36 @@ export default {
                 if (months[i] > 0) {
                     months_filtered.push(i);
                 }
-                // console.log(i);
             }
 
             this.chartConfig.labels = months_filtered;
-
-            console.log(this.chartConfig.labels);
-            console.log(this.chartConfig.datasets);
-
             this.componenteAtual = GraficoConsultorComponent;
         },
         switchComponentPizza() {
+            for (let x = 0; x < this.grafico_cores.length; x++) {
+                this.grafico_cores[x].qtd = 0;
+            }
+            const somas = [];
+            const labels = [];
+            const cores = [];
+            for(let i in this.consultores) {
+                let soma = 0;
+                for(let x in this.consultores[i].operacoes) {
+                    soma += this.consultores[i].operacoes[x].renda_liquida;
+                }
+                labels.push(this.consultores[i].nome);
+                cores.push(this.getClienteCor());
+                somas.push(soma);
+            }
+
+            this.chartConfig.labels = labels;
+            this.chartConfig.datasets = [
+                {
+                    backgroundColor: cores,
+                    data: somas
+                }
+            ];
+
             this.componenteAtual = PizzaConsultorComponent;
         },
         async listarConsultores() {
@@ -215,10 +219,8 @@ export default {
 
 
             this.consultores = data;
-            console.log(this.consultores);
         },
         getConsultoresSelecionados(consultores) {
-            console.log(consultores);
         }
     }
 }

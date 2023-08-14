@@ -60,7 +60,6 @@ export default {
                 if(this.list1[x] == this.list1Selecionado) {
                         this.list2.push(this.list1[x]);
                         this.list1[x] = '';
-                        console.log(this.list1)
                     }
             }
         },
@@ -69,7 +68,6 @@ export default {
                 if(this.list2[x] == this.list2Selecionado) {
                         this.list1.push(this.list2[x]);
                         this.list2[x] = '';
-                        console.log(this.list2)
                     }
             }
         },
@@ -80,8 +78,6 @@ export default {
     async mounted() {
         const { data } = await axios.get('/consultores_disponiveis');
         this.list1 = data;
-
-        console.log(this.list1);
     }
 }
 </script>
