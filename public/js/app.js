@@ -6142,11 +6142,6 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _vm._m(0);
-};
-var staticRenderFns = [function () {
-  var _vm = this,
-    _c = _vm._self._c;
   return _c("div", [_c("div", {
     staticClass: "container"
   }, [_c("div", {
@@ -6156,11 +6151,14 @@ var staticRenderFns = [function () {
   }, [_c("div", {
     staticClass: "card"
   }, [_c("div", {
-    staticClass: "card-header"
-  }, [_vm._v("Dashboard")]), _vm._v(" "), _c("div", {
     staticClass: "card-body"
-  }, [_vm._v("\n                        Hello World\n                    ")])])])])])]);
-}];
+  }, [_c("table", [_c("tr", [_c("td", [_c("CENTER", [_c("H1", [_vm._v("Protótipo para Avaliação de Candidato.")]), _vm._v(" "), _c("p", [_vm._v("\n                                    A Avaliacão consiste no desenvolvimento da funcionalidade "), _c("router-link", {
+    attrs: {
+      to: "/listarConsultores"
+    }
+  }, [_vm._v("Performance Comercial")]), _vm._v(" (Comercial -> Performance\n                                    Comercial).\n                                    .")], 1)], 1), _c("br")], 1)])])])])])])])]);
+};
+var staticRenderFns = [];
 render._withStripped = true;
 
 
