@@ -44,10 +44,7 @@
             </tbody>
         </table>
         <selecionar-consultores-component ref="listarComponente" />
-        <component
-            :is="componenteAtual"
-            :data="this.consultores"
-            :chartConfig="this.chartConfig"
+        <component :is="componenteAtual" :data="this.consultores" :chartConfig="this.chartConfig"
             :chartOptions="this.chartOptions">
         </component>
 
@@ -88,7 +85,15 @@ export default {
             },
             chartOptions: {
                 responsive: true,
-            }
+            },
+            grafico_cores: [
+                { cor: 'red', qtd: 0 },
+                { cor: 'yello', qtd: 0 },
+                { cor: 'orange', qtd: 0 },
+                { cor: 'green', qtd: 0 },
+                { cor: 'pink', qtd: 0 },
+                { cor: 'blue', qtd: 0 }
+            ]
         }
     },
     mounted() {
@@ -100,8 +105,24 @@ export default {
         },
     },
     methods: {
+        getClienteCor() {
+            let cor = null;
+            while (cor == null) {
+                let index = Math.floor(Math.random() * 5);
+                console.log(index);
+                if (this.grafico_cores[index].qtd < 1) {
+                    cor = this.grafico_cores[index].cor;
+                    this.grafico_cores[index].qtd = this.grafico_cores[index].qtd + 1;
+                }
+            }
+
+            return cor;
+        },
         switchComponentGrafico() {
             // console.log(this.data);
+            for (let x = 0; x < this.grafico_cores.length; x++) {
+                this.grafico_cores[x].qtd = 0;
+            }
             const months = {
                 'jan.': 0,
                 'fev.': 0,
@@ -122,7 +143,7 @@ export default {
             for (let i in this.consultores) {
                 let cliente = {
                     label: this.consultores[i].nome,
-                    backgroundColor: 'blue',
+                    backgroundColor: this.getClienteCor(),
                     data: []
                 };
                 // console.log(this.consultores[i].operacoes);

@@ -5306,7 +5306,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       },
       chartOptions: {
         responsive: true
-      }
+      },
+      grafico_cores: [{
+        cor: 'red',
+        qtd: 0
+      }, {
+        cor: 'yello',
+        qtd: 0
+      }, {
+        cor: 'orange',
+        qtd: 0
+      }, {
+        cor: 'green',
+        qtd: 0
+      }, {
+        cor: 'pink',
+        qtd: 0
+      }, {
+        cor: 'blue',
+        qtd: 0
+      }]
     };
   },
   mounted: function mounted() {
@@ -5318,8 +5337,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   methods: {
+    getClienteCor: function getClienteCor() {
+      var cor = null;
+      while (cor == null) {
+        var index = Math.floor(Math.random() * 5);
+        console.log(index);
+        if (this.grafico_cores[index].qtd < 1) {
+          cor = this.grafico_cores[index].cor;
+          this.grafico_cores[index].qtd = this.grafico_cores[index].qtd + 1;
+        }
+      }
+      return cor;
+    },
     switchComponentGrafico: function switchComponentGrafico() {
       // console.log(this.data);
+      for (var x = 0; x < this.grafico_cores.length; x++) {
+        this.grafico_cores[x].qtd = 0;
+      }
       var months = {
         'jan.': 0,
         'fev.': 0,
@@ -5338,18 +5372,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       for (var i in this.consultores) {
         var cliente = {
           label: this.consultores[i].nome,
-          backgroundColor: 'blue',
+          backgroundColor: this.getClienteCor(),
           data: []
         };
         // console.log(this.consultores[i].operacoes);
         for (var m in months) {
-          for (var x in this.consultores[i].operacoes) {
-            var mes = new Date(this.consultores[i].operacoes[x].periodo).toLocaleString('pt-BR', {
+          for (var _x in this.consultores[i].operacoes) {
+            var mes = new Date(this.consultores[i].operacoes[_x].periodo).toLocaleString('pt-BR', {
               month: 'short'
             });
             if (mes == m) {
               months[m]++;
-              cliente.data.push(this.consultores[i].operacoes[x].renda_liquida);
+              cliente.data.push(this.consultores[i].operacoes[_x].renda_liquida);
             }
             // console.log('debug atual');
             // console.log(new Date(m).getMonth());
