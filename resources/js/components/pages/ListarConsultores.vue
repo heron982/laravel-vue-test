@@ -177,14 +177,24 @@ export default {
             const somas = [];
             const labels = [];
             const cores = [];
+            let soma_total = 0;
             for(let i in this.consultores) {
+                let soma = 0;
+                for(let x in this.consultores[i].operacoes) {
+                    soma += this.consultores[i].operacoes[x].renda_liquida;
+                }
+                soma_total += soma;
+            }
+
+            for(let i in this.consultores) {
+
                 let soma = 0;
                 for(let x in this.consultores[i].operacoes) {
                     soma += this.consultores[i].operacoes[x].renda_liquida;
                 }
                 labels.push(this.consultores[i].nome);
                 cores.push(this.getClienteCor());
-                somas.push(soma);
+                somas.push(soma * 100 / soma_total);
             }
 
             this.chartConfig.labels = labels;

@@ -5400,14 +5400,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var somas = [];
       var labels = [];
       var cores = [];
+      var soma_total = 0;
       for (var i in this.consultores) {
         var soma = 0;
         for (var _x2 in this.consultores[i].operacoes) {
           soma += this.consultores[i].operacoes[_x2].renda_liquida;
         }
-        labels.push(this.consultores[i].nome);
+        soma_total += soma;
+      }
+      for (var _i2 in this.consultores) {
+        var _soma = 0;
+        for (var _x3 in this.consultores[_i2].operacoes) {
+          _soma += this.consultores[_i2].operacoes[_x3].renda_liquida;
+        }
+        labels.push(this.consultores[_i2].nome);
         cores.push(this.getClienteCor());
-        somas.push(soma);
+        somas.push(_soma * 100 / soma_total);
       }
       this.chartConfig.labels = labels;
       this.chartConfig.datasets = [{
