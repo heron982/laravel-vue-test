@@ -8,33 +8,48 @@
                     </td>
                     <td>
                         <font color="black">
-                            <select v-model="mes_inicio">
-                                <option v-for="(item, index) in this.meses" :key="index" :value="item">{{ item }}</option>
-                            </select>
-                            <select v-model="ano_inicio">
-                                <option v-for="(item, index) in this.anos" :key="index" :value="item">{{ item }}</option>
-                            </select>
-
-                            <select v-model="mes_final">
-                                <option v-for="(item, index) in this.meses" :key="index" :value="item">{{ item }}</option>
-                            </select>
-                            <select v-model="ano_final">
-                                <option v-for="(item, index) in this.anos" :key="index" :value="item">{{ item }}</option>
-                            </select>
+                            <div class="col-6">
+                                <div class="row">
+                                    <div class="col">
+                                        <select v-model="mes_inicio" class="form-control">
+                                            <option v-for="(item, index) in this.meses" :key="index" :value="item">{{ item
+                                            }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <select v-model="ano_inicio" class="form-control">
+                                            <option v-for="(item, index) in this.anos" :key="index" :value="item">{{ item }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <select v-model="mes_final" class="form-control">
+                                            <option v-for="(item, index) in this.meses" :key="index" :value="item">{{ item
+                                            }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <select v-model="ano_final" class="form-control">
+                                            <option v-for="(item, index) in this.anos" :key="index" :value="item">{{ item }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                         </font>
                     </td>
                     <td width="20%" rowspan="2">
                         <div align="center">
                             <font color="black">
 
-                                <button @click="listarConsultores"
+                                <button class="btn btn-primary" @click="listarConsultores"
                                     style="BORDER-RIGHT: 1px outset; BORDER-TOP: 1px outset; FONT-SIZE: 8pt; BACKGROUND-POSITION-Y: center; LEFT: 120px; BACKGROUND-IMAGE: url(img/icone_relatorio.png); BORDER-LEFT: 1px outset; WIDTH: 110px; BORDER-BOTTOM: 1px outset; BACKGROUND-REPEAT: no-repeat; FONT-FAMILY: Tahoma, Verdana, Arial; HEIGHT: 22px; BACKGROUND-COLOR: #CCCCCC">Relatorio</button>
 
-                                <button @click="switchComponentGrafico()"
+                                <button :disabled="this.consultores.length < 1" class="btn btn-primary" @click="switchComponentGrafico()"
                                     style="BORDER-RIGHT: 1px outset; BORDER-TOP: 1px outset; FONT-SIZE: 8pt; BACKGROUND-POSITION-Y: center; LEFT: 120px; BACKGROUND-IMAGE: url(img/icone_grafico.png); BORDER-LEFT: 1px outset; WIDTH: 110px; BORDER-BOTTOM: 1px outset; BACKGROUND-REPEAT: no-repeat; FONT-FAMILY: Tahoma, Verdana, Arial; HEIGHT: 22px; BACKGROUND-COLOR: #CCCCCC">Gráfico</button>
 
 
-                                <button @click="switchComponentPizza()"
+                                <button :disabled="this.consultores.length < 1" class="btn btn-primary" @click="switchComponentPizza()"
                                     style="BORDER-RIGHT: 1px outset; BORDER-TOP: 1px outset; FONT-SIZE: 8pt; BACKGROUND-POSITION-Y: center; LEFT: 120px; BACKGROUND-IMAGE: url(img/icone_pizza.png); BORDER-LEFT: 1px outset; WIDTH: 110px; BORDER-BOTTOM: 1px outset; BACKGROUND-REPEAT: no-repeat; FONT-FAMILY: Tahoma, Verdana, Arial; HEIGHT: 22px; BACKGROUND-COLOR: #CCCCCC">Pizza</button>
 
                             </font>
@@ -69,10 +84,10 @@ export default {
     },
     data() {
         return {
-            mes_inicio: 'Fev',
-            ano_inicio: '2004',
-            mes_final: 'Mai',
-            ano_final: '2005',
+            mes_inicio: 'Jan',
+            ano_inicio: '2003',
+            mes_final: 'Jan',
+            ano_final: '2003',
             meses: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
             anos: ['2003', '2004', '2005', '2006', '2007'],
             consultores: [],
@@ -178,18 +193,18 @@ export default {
             const labels = [];
             const cores = [];
             let soma_total = 0;
-            for(let i in this.consultores) {
+            for (let i in this.consultores) {
                 let soma = 0;
-                for(let x in this.consultores[i].operacoes) {
+                for (let x in this.consultores[i].operacoes) {
                     soma += this.consultores[i].operacoes[x].renda_liquida;
                 }
                 soma_total += soma;
             }
 
-            for(let i in this.consultores) {
+            for (let i in this.consultores) {
 
                 let soma = 0;
-                for(let x in this.consultores[i].operacoes) {
+                for (let x in this.consultores[i].operacoes) {
                     soma += this.consultores[i].operacoes[x].renda_liquida;
                 }
                 labels.push(this.consultores[i].nome);

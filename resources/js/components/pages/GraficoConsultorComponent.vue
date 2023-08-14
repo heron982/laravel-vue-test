@@ -1,5 +1,8 @@
 <template>
     <div>
+        <div class="alert alert-info mt-5" v-show="chartConfig.datasets.length < 1">
+            Nenhum registro encontrado
+        </div>
         <Bar :data="chartConfig" :options="chartOptions"/>
     </div>
 </template>

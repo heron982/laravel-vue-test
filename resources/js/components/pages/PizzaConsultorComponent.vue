@@ -1,5 +1,8 @@
 <template>
     <div>
+        <div class="alert alert-info mt-5" v-show="chartConfig.labels < 1">
+            Nenhum registro encontrado
+        </div>
         <Pie :data="chartConfig" :options="chartOptions" />
     </div>
 </template>

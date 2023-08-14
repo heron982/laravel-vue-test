@@ -8,7 +8,7 @@
                 <td>
                     <table align="center">
                         <tr>
-                            <td><select multiple size="8" name="list1" id="list1" style="width:280"
+                            <td><select class="form-control" multiple size="8" name="list1" id="list1" style="width:280"
                                     v-model="list1Selecionado">
                                     <option
                                         v-for="(item, index) in this.list1"
@@ -19,12 +19,12 @@
 
                                 </select>
                             </td>
-                            <td align="center" valign="middle"><input name="button" type="button" @click="setList2"
-                                    value=">>">
-                                <br>
-                                <input name="button" type="button" @click="setList1" value="<<">
+                            <td align="center" valign="middle">
+                                <input name="button" class="btn btn-primary" type="button" @click="setList2" value=">>">
+                                <br><br>
+                                <input class="btn btn-primary" name="button" type="button" @click="setList1" value="<<">
                             </td>
-                            <td><select multiple size="8" name="list2" id="list2" style="width:280"
+                            <td><select class="form-control" multiple size="8" name="list2" id="list2" style="width:280"
                                     v-model="list2Selecionado">
                                     <option
                                         v-for="(item, index) in this.list2"

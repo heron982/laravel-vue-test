@@ -5119,6 +5119,9 @@ __webpack_require__.r(__webpack_exports__);
     nome: String,
     operacoes: Array
   },
+  data: function data() {
+    return {};
+  },
   mounted: function mounted() {},
   computed: {
     getOperacoes: function getOperacoes() {
@@ -5244,6 +5247,11 @@ __webpack_require__.r(__webpack_exports__);
     PesquisaConsultorContainerComponent: _PesquisaConsultorContainerComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   name: "ListarConsultorComponent",
+  data: function data() {
+    return {
+      emptyData: false
+    };
+  },
   props: {
     data: []
   }
@@ -5287,10 +5295,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      mes_inicio: 'Fev',
-      ano_inicio: '2004',
-      mes_final: 'Mai',
-      ano_final: '2005',
+      mes_inicio: 'Jan',
+      ano_inicio: '2003',
+      mes_final: 'Jan',
+      ano_final: '2003',
       meses: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
       anos: ['2003', '2004', '2005', '2006', '2007'],
       consultores: [],
@@ -5545,17 +5553,56 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("router-link", {
+  return _c("div", [_c("nav", {
+    staticClass: "navbar navbar-expand-md navbar-light bg-white shadow-sm"
+  }, [_c("div", {
+    staticClass: "container"
+  }, [_c("a", {
+    staticClass: "navbar-brand",
+    attrs: {
+      href: "/"
+    }
+  }, [_vm._v("\n                Agence\n            ")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("div", {
+    staticClass: "collapse navbar-collapse",
+    attrs: {
+      id: "navbarSupportedContent"
+    }
+  }, [_c("ul", {
+    staticClass: "navbar-nav me-auto"
+  }), _vm._v(" "), _c("ul", {
+    staticClass: "navbar-nav ms-auto"
+  }, [_c("li", {
+    staticClass: "nav-item"
+  }, [_c("router-link", {
+    staticClass: "nav-link",
     attrs: {
       to: "/listarConsultores"
     }
-  }, [_vm._v("Listar Consultores")]), _vm._v(" "), _c("router-link", {
+  }, [_vm._v("Listar Consultores")])], 1), _vm._v(" "), _c("li", {
+    staticClass: "nav-item"
+  }, [_c("router-link", {
+    staticClass: "nav-link",
     attrs: {
       to: "/"
     }
-  }, [_vm._v("Pagina inicial")])], 1);
+  }, [_vm._v("Pagina inicial")])], 1)])])])]), _vm._v(" "), _c("br")]);
 };
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("button", {
+    staticClass: "navbar-toggler",
+    attrs: {
+      type: "button",
+      "data-bs-toggle": "collapse",
+      "data-bs-target": "#navbarSupportedContent",
+      "aria-controls": "navbarSupportedContent",
+      "aria-expanded": "false"
+    }
+  }, [_c("span", {
+    staticClass: "navbar-toggler-icon"
+  })]);
+}];
 render._withStripped = true;
 
 
@@ -5577,6 +5624,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", [_c("table", {
+    staticClass: "mt-5",
     attrs: {
       cellspacing: "1",
       cellpadding: "3",
@@ -5709,6 +5757,7 @@ var render = function render() {
       value: _vm.list1Selecionado,
       expression: "list1Selecionado"
     }],
+    staticClass: "form-control",
     staticStyle: {
       width: "280"
     },
@@ -5748,6 +5797,7 @@ var render = function render() {
       valign: "middle"
     }
   }, [_c("input", {
+    staticClass: "btn btn-primary",
     attrs: {
       name: "button",
       type: "button",
@@ -5756,7 +5806,8 @@ var render = function render() {
     on: {
       click: _vm.setList2
     }
-  }), _vm._v(" "), _c("br"), _vm._v(" "), _c("input", {
+  }), _vm._v(" "), _c("br"), _c("br"), _vm._v(" "), _c("input", {
+    staticClass: "btn btn-primary",
     attrs: {
       name: "button",
       type: "button",
@@ -5772,6 +5823,7 @@ var render = function render() {
       value: _vm.list2Selecionado,
       expression: "list2Selecionado"
     }],
+    staticClass: "form-control",
     staticStyle: {
       width: "280"
     },
@@ -5847,7 +5899,15 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("Bar", {
+  return _c("div", [_c("div", {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: _vm.chartConfig.datasets.length < 1,
+      expression: "chartConfig.datasets.length < 1"
+    }],
+    staticClass: "alert alert-info mt-5"
+  }, [_vm._v("\n        Nenhum registro encontrado\n    ")]), _vm._v(" "), _c("Bar", {
     attrs: {
       data: _vm.chartConfig,
       options: _vm.chartOptions
@@ -5875,7 +5935,15 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", _vm._l(_vm.data, function (item, index) {
+  return _c("div", [_c("div", {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: this.data.length < 1,
+      expression: "this.data.length < 1"
+    }],
+    staticClass: "alert alert-info mt-5"
+  }, [_vm._v("\n        Nenhum registro encontrado\n    ")]), _vm._v(" "), _vm._l(_vm.data, function (item, index) {
     return _c("pesquisa-consultor-container-component", {
       key: index,
       attrs: {
@@ -5883,7 +5951,7 @@ var render = function render() {
         operacoes: item.operacoes
       }
     });
-  }), 1);
+  })], 2);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -5922,6 +5990,12 @@ var render = function render() {
     attrs: {
       color: "black"
     }
+  }, [_c("div", {
+    staticClass: "col-6"
+  }, [_c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col"
   }, [_c("select", {
     directives: [{
       name: "model",
@@ -5929,6 +6003,7 @@ var render = function render() {
       value: _vm.mes_inicio,
       expression: "mes_inicio"
     }],
+    staticClass: "form-control",
     on: {
       change: function change($event) {
         var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
@@ -5947,13 +6022,16 @@ var render = function render() {
         value: item
       }
     }, [_vm._v(_vm._s(item))]);
-  }), 0), _vm._v(" "), _c("select", {
+  }), 0)]), _vm._v(" "), _c("div", {
+    staticClass: "col"
+  }, [_c("select", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.ano_inicio,
       expression: "ano_inicio"
     }],
+    staticClass: "form-control",
     on: {
       change: function change($event) {
         var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
@@ -5971,14 +6049,17 @@ var render = function render() {
       domProps: {
         value: item
       }
-    }, [_vm._v(_vm._s(item))]);
-  }), 0), _vm._v(" "), _c("select", {
+    }, [_vm._v(_vm._s(item) + "\n                                        ")]);
+  }), 0)]), _vm._v(" "), _c("div", {
+    staticClass: "col"
+  }, [_c("select", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.mes_final,
       expression: "mes_final"
     }],
+    staticClass: "form-control",
     on: {
       change: function change($event) {
         var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
@@ -5997,13 +6078,16 @@ var render = function render() {
         value: item
       }
     }, [_vm._v(_vm._s(item))]);
-  }), 0), _vm._v(" "), _c("select", {
+  }), 0)]), _vm._v(" "), _c("div", {
+    staticClass: "col"
+  }, [_c("select", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.ano_final,
       expression: "ano_final"
     }],
+    staticClass: "form-control",
     on: {
       change: function change($event) {
         var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
@@ -6021,8 +6105,8 @@ var render = function render() {
       domProps: {
         value: item
       }
-    }, [_vm._v(_vm._s(item))]);
-  }), 0)])], 1), _vm._v(" "), _c("td", {
+    }, [_vm._v(_vm._s(item) + "\n                                        ")]);
+  }), 0)])])])])], 1), _vm._v(" "), _c("td", {
     attrs: {
       width: "20%",
       rowspan: "2"
@@ -6036,6 +6120,7 @@ var render = function render() {
       color: "black"
     }
   }, [_c("button", {
+    staticClass: "btn btn-primary",
     staticStyle: {
       "BORDER-RIGHT": "1px outset",
       "BORDER-TOP": "1px outset",
@@ -6055,6 +6140,7 @@ var render = function render() {
       click: _vm.listarConsultores
     }
   }, [_vm._v("Relatorio")]), _vm._v(" "), _c("button", {
+    staticClass: "btn btn-primary",
     staticStyle: {
       "BORDER-RIGHT": "1px outset",
       "BORDER-TOP": "1px outset",
@@ -6070,12 +6156,16 @@ var render = function render() {
       HEIGHT: "22px",
       "BACKGROUND-COLOR": "#CCCCCC"
     },
+    attrs: {
+      disabled: this.consultores.length < 1
+    },
     on: {
       click: function click($event) {
         return _vm.switchComponentGrafico();
       }
     }
   }, [_vm._v("Gráfico")]), _vm._v(" "), _c("button", {
+    staticClass: "btn btn-primary",
     staticStyle: {
       "BORDER-RIGHT": "1px outset",
       "BORDER-TOP": "1px outset",
@@ -6090,6 +6180,9 @@ var render = function render() {
       "FONT-FAMILY": "Tahoma, Verdana, Arial",
       HEIGHT: "22px",
       "BACKGROUND-COLOR": "#CCCCCC"
+    },
+    attrs: {
+      disabled: this.consultores.length < 1
     },
     on: {
       click: function click($event) {
@@ -6179,7 +6272,15 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("Pie", {
+  return _c("div", [_c("div", {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: _vm.chartConfig.labels < 1,
+      expression: "chartConfig.labels < 1"
+    }],
+    staticClass: "alert alert-info mt-5"
+  }, [_vm._v("\n        Nenhum registro encontrado\n    ")]), _vm._v(" "), _c("Pie", {
     attrs: {
       data: _vm.chartConfig,
       options: _vm.chartOptions

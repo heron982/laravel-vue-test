@@ -1,6 +1,6 @@
 <template>
     <div>
-        <table cellspacing=1 cellpadding=3 width="100%"
+        <table class="mt-5" cellspacing=1 cellpadding=3 width="100%"
             bgcolor=#cccccc  id="pesquisaAvancada">
         <tbody>
             <tr bgcolor=#efefef>
@@ -44,6 +44,10 @@ export default {
     props: {
         nome: String,
         operacoes: Array
+    },
+    data() {
+        return {
+        }
     },
     mounted() {
 
